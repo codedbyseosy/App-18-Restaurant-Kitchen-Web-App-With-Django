@@ -15,9 +15,9 @@ class MenuList(generic.ListView):
         return context
 
 
-# class About(generic.DetailView):
-#     model = Item
-#     template_name = "about.html"
+class About(generic.TemplateView):
+    model = Item
+    template_name = "about.html"
 
 
 class MenuItemDetail(generic.DetailView):
