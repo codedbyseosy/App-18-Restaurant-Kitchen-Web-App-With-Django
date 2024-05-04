@@ -1,25 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Restaurant Menu</h1>
-        {% for meal in meals %}
-            <h2>{{ meal.1 }}</h2>
-                {% for row in item_list %}
-                    {% if row.meal_type == meal.0 %}
-                        {% if row.status == 0 %}
-                            <a href="{% url 'menu_item' row.pk %}"><h3><del>{{ row.meal }}</del></h3></a>
+{% extends 'base.html' %}
+{% block content %}
+<div class="'container">
+    <h1>Seosy's Culinary Fusion</h1>
+        <ul class="list-group list-group-flush">
+            {% for meal in meals %}
+                <h2 class="pt-5">{{ meal.1 }}</h2>
+                    {% for row in item_list %}
+                        {% if row.meal_type == meal.0 %}
+                            {% if row.status == 0 %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-0">
+                                <a href="{% url 'menu_item' row.pk %}"><h3><del>{{ row.meal }}</del></h3></a>
+                                <span class="badge bg-primary rounded-pill">{{ row.price }}</span>
+                            </li>
+                            </li class="list-group-item pt-0">
                                 <p>{{ row.description }}</p>
-                        {% else %}
-                            <a href="{% url 'menu_item' row.pk %}"><h3>{{ row.meal }}</h3></a>
+                            </li>
+                            {% else %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-0">
+                                <a href="{% url 'menu_item' row.pk %}"><h3>{{ row.meal }}</h3></a>
+                                <span class="badge bg-primary rounded-pill">{{ row.price }}</span>
+                            </li>
+                            </li class="list-group-item pt-0">
                                 <p>{{ row.description }}</p>
+                            </li>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
-        {% endfor %}
-</body>
-
-</html>
+                    {% endfor %}
+            {% endfor %}
+        </ul>
+</div>
+{% endblock content %}
